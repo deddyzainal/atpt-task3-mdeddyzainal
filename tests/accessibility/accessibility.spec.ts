@@ -10,11 +10,7 @@ test.describe('Accessibility test', () => {
         const results = await new AxeBuilder({ page }).analyze()
 
         expect(results.violations).toEqual([]);
-
-        await testInfo.attach('accessibility report', {
-            body: JSON.stringify(results, null, 2),
-            contentType: 'application/json'
-        })
+        await attachAccessibilityReport(testInfo, results);
     })
 
     test('Check accessibility with tags', async ({ page }, testInfo) => {
@@ -23,6 +19,7 @@ test.describe('Accessibility test', () => {
         .analyze()
 
         expect(results.violations).toEqual([]);
+        await attachAccessibilityReport(testInfo, results);
     })
     
     
