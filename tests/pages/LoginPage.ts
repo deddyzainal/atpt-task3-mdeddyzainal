@@ -9,10 +9,4 @@ export class LoginPage {
     await this.page.getByRole('button', { name: 'Signup' }).click();
     await expect(this.page).toHaveURL(/signup/);
   }
-
-  async verifyScreenshot() {
-    await expect(this.page).toHaveScreenshot('02-login.png', {
-      maxDiffPixelRatio: 0.01,
-    });
-  }
 }

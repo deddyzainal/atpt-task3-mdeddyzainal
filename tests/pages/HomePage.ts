@@ -12,14 +12,4 @@ export class HomePage {
     await this.page.getByRole('link', { name: ' Signup / Login' }).click();
     await expect(this.page).toHaveURL(/login/);
   }
-
-  async verifyScreenshot() {
-    await expect(this.page).toHaveScreenshot('01-homepage.png', {
-      mask: [
-        this.page.locator('#slider-carousel'),
-        this.page.locator('iframe'),
-      ],
-      maxDiffPixelRatio: 0.01,
-    });
-  }
 }

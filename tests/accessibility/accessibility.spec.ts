@@ -1,8 +1,12 @@
 import { expect, test } from '@playwright/test'
 import { AxeBuilder } from '@axe-core/playwright'
+import { SharedController } from '../shared/shared.controller'
+
+let shareController: SharedController;
 
 test.describe('Accessibility test', () => {
     test.beforeEach(async ({ page }) => {
+        shareController = new SharedController(page);
         await page.goto('https://automationexercise.com/')
     })
     
@@ -10,7 +14,7 @@ test.describe('Accessibility test', () => {
         const results = await new AxeBuilder({ page }).analyze()
 
         expect(results.violations).toEqual([]);
-        await attachAccessibilityReport(testInfo, results);
+        await shareController.accessibilityErrorCheck(results, testInfo);
     })
 
     test('Check accessibility with tags', async ({ page }, testInfo) => {
@@ -19,8 +23,6 @@ test.describe('Accessibility test', () => {
         .analyze()
 
         expect(results.violations).toEqual([]);
-        await attachAccessibilityReport(testInfo, results);
+        await shareController.accessibilityErrorCheck(results, testInfo);
     })
-    
-    
 })

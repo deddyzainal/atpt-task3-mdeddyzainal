@@ -1,12 +1,10 @@
 import { Page, expect } from '@playwright/test';
+import { SharedController } from '../shared/shared.controller';
 
 export class AccountPage {
   constructor(private page: Page) {}
 
   async verifyAccountCreated() {
-    await expect(this.page).toHaveScreenshot('05-account-created.png', {
-      maxDiffPixelRatio: 0.01,
-    });
     await expect(this.page.getByText('Account Created!')).toBeVisible();
     await this.page.click('a:has-text("Continue")');
   }

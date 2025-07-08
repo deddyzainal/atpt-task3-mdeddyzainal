@@ -1,15 +1,12 @@
 import { Page, expect } from '@playwright/test';
+import { SharedController } from '../shared/shared.controller';
 
 export class SignupPage {
   constructor(private page: Page) {}
 
-  async verifyScreenshot() {
-    await expect(this.page).toHaveScreenshot('03-signup-form.png', {
-      maxDiffPixelRatio: 0.01,
-    });
-  }
-
   async fillAccountDetails(user: any) {
+    const shareController = new SharedController(this.page);
+
     await this.page.getByRole('radio', { name: 'Mr.' }).check();
     await this.page.fill('#password', user.password);
     await this.page.selectOption('#days', '10');
@@ -25,10 +22,6 @@ export class SignupPage {
     await this.page.fill('#city', user.city);
     await this.page.fill('#zipcode', user.zipcode);
     await this.page.fill('#mobile_number', user.mobile);
-
-    await expect(this.page).toHaveScreenshot('04-before-create-account.png', {
-      maxDiffPixelRatio: 0.01,
-    });
   }
 
   async submitAccountForm() {

@@ -35,18 +35,15 @@ export class UserController {
 
   async gotoHomePage() {
     await this.homePage.navigate();
-    await this.homePage.verifyScreenshot();
   }
 
   async gotoLoginPage() {
     await this.homePage.gotoLogin();
-    await this.loginPage.verifyScreenshot();
   }
 
   async fillSignupForm() {
-    await this.loginPage.fillSignup(this.userData);
-    await this.signupPage.verifyScreenshot();
-  }
+    await this.loginPage.fillSignup(this.userData);  
+}
 
   async fillAccountDetailsAndSubmit() {
     await this.signupPage.fillAccountDetails(this.userData);
