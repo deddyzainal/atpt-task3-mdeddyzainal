@@ -13,8 +13,8 @@ test.describe('Accessibility test', () => {
     test('Check accessibility entire page', async ({ page }, testInfo) => {
         const results = await new AxeBuilder({ page }).analyze()
 
+        await shareController.attachAccessibilityReport(testInfo, results);
         expect(results.violations).toEqual([]);
-        await shareController.accessibilityErrorCheck(results, testInfo);
     })
 
     test('Check accessibility with tags', async ({ page }, testInfo) => {
@@ -22,7 +22,7 @@ test.describe('Accessibility test', () => {
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
         .analyze()
 
+        await shareController.attachAccessibilityReport(testInfo, results);
         expect(results.violations).toEqual([]);
-        await shareController.accessibilityErrorCheck(results, testInfo);
     })
 })
